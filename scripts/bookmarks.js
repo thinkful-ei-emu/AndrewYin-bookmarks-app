@@ -116,7 +116,6 @@ const bookmarks = (function(){
       if (!bookmark) return;
       if (event.target.id !== `${bookmark.id}editButton`) return;
 
-      console.log('Edit Button Clicked.');
       store.setIsEditingState(bookmark.id, true);
       render();
     });
