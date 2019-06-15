@@ -17,14 +17,13 @@
     <section id="formSection">
       <form id="addBookmarkForm" name="bookmarkForm">
         <label for="siteName">Site Name: </label><br>
-        <input id="siteName" name="title" placeholder="Google" required><br>
+        <input id="siteName" name="title" placeholder="Google" ><br>
         <label for="siteUrl">Site URL: </label><br>
-        <input id="siteUrl" name="url" placeholder="www.google.com" required><br>
+        <input id="siteUrl" name="url" placeholder="www.google.com" ><br>
 
         <label for="siteDesc">Site Description:</label><br>
         <textarea id="siteDesc" name="desc" placeholder="The most popular search engine."></textarea><br>
 
-        <p>Site Rating:</p>
         <section class="siteRating">
           <input type="radio" class="rating" id="rating5" name="rating" value="5"/>
           <label class="fa fa-star checked" for="rating5"></label>
@@ -36,22 +35,28 @@
           <label class="fa fa-star checked" for="rating2"></label>
           <input type="radio" class="rating" id="rating1" name="rating" value="1"/>
           <label class="fa fa-star checked" for="rating1"></label>
+          <p>Site Rating:&nbsp</p>
         </section>
 
-        <input type="submit" value="Add Bookmark">
-        <button type="button">Cancel</button>
-        <button id="resetButton" type="reset" hidden></button>
+        <section>
+          <button type="submit" value="Add Bookmark">Submit</button>
+          <!-- <button type="button">Cancel</button> -->
+          <button id="resetButton" type="reset">Cancel</button>  
+        </section>
       </form>
     </section>
-    <label for="filterByRating">Show:</label>
-    <select id="filterByRating">
-      <option value=0>All</option>
-      <option value=1>>= 1</option>
-      <option value=2>>= 2</option>
-      <option value=3>>= 3</option>
-      <option value=4>>= 4</option>
-      <option value=5>5</option>
-    </select>
+    <section id="filterSection">
+      <label for="filterByRating">Show:</label>
+      <select id="filterByRating">
+        <option value=0>All</option>
+        <option value=1>>= 1</option>
+        <option value=2>>= 2</option>
+        <option value=3>>= 3</option>
+        <option value=4>>= 4</option>
+        <option value=5>5</option>
+      </select>  
+    </section>
+    <section id="errorSection"></section>
     <ul id="bookmark-list">
     </ul>
   </main>

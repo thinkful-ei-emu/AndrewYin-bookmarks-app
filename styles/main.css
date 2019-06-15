@@ -2,18 +2,48 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form input, textarea {
+  width: 270px;
+}
+form input {
+  height: 25px;
+  padding: 5px;
+}
+form button {
+  margin: 0;
+  width: 135px;
+}
+form textarea {
+  height: 50px;
+}
+
 p {
   margin: 0;
 }
 
-.hidden {
-  display: none;
-}
 
 #formSection, .bookmark-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 1px solid black;
-  width: 220px;
+  width: 300px;
   margin: 5px;
+  padding: 10px;
+}
+
+.expandedArea {
+  display: flex;
+  flex-direction: column;
+}
+.hidden {
+  display: none;
 }
 
 ul {
@@ -22,6 +52,12 @@ ul {
 }
 li {
   list-style: none;
+}
+li form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 270px;
 }
 
 .siteRating{

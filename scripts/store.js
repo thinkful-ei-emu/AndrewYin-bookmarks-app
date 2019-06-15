@@ -85,6 +85,8 @@ const store = (function() {
     bookmarks: [],
     filteredBy: 0,
     addingBookmark: false,
+    showError: false,
+    errorMessage: '',
     addBookmark,
     findBookmark,
     editBookmark,
@@ -92,6 +94,6 @@ const store = (function() {
     setFilter,
     setIsEditingState,
     setAddingBookmarkState,
-    setExpandState
+    setExpandState,
   };
 })();

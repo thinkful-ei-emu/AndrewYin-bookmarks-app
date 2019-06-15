@@ -22,6 +22,7 @@ let api = (function() {
       })
       .then(resJson => {
         if (error) {
+          console.log(resJson.message)
           error.message = resJson.message;
           return Promise.reject(error);
         }
@@ -48,9 +49,13 @@ let api = (function() {
   function createBookmark(newBookmark) {
     // console.log(...args);
     let bookmark = {
-      title: newBookmark.title.trim(),
-      url: verifyHTTPS(newBookmark.url),
+      // title: newBookmark.title,
+      // url: verifyHTTPS(newBookmark.url),
     };
+
+    if(newBookmark.title) bookmark.title = newBookmark.title.trim();
+    if(newBookmark.url) bookmark.url = verifyHTTPS(newBookmark.url);
+
 
     (newBookmark.desc && newBookmark.desc !== null) ? Object.assign(bookmark, { desc: newBookmark.desc }) : bookmark;
     newBookmark.rating ? Object.assign(bookmark, { rating: newBookmark.rating }) : bookmark;

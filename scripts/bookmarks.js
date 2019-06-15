@@ -7,7 +7,9 @@ const bookmarks = (function(){
   function serializeJSON(form) {
     const formData  = new FormData(form);
     const formJSON = {};
-    formData.forEach((value, name) => formJSON[name] = value);
+    formData.forEach((value, name) => {
+      if (value) formJSON[name] = value;
+    });
 
     return formJSON;
   }
@@ -54,9 +56,9 @@ const bookmarks = (function(){
       `<p>${bookmark.desc !== null ? bookmark.desc : ''}</p>` ;
     const bookmarkUrl = isEditing ?
       `<input name="url" value="${bookmark.url}" />`:
-      `<p>${bookmark.url}</p>`;
+      `<a href="${bookmark.url}">Link Here</a><br>`;
     const editButton = isEditing ?
-      `<input id="${bookmark.id}submitEditButton" type="submit" value="submit">` :
+      `<button id="${bookmark.id}submitEditButton" type="submit" value="submit">Submit</button>` :
       `<button id="${bookmark.id}editButton" type="button">Edit</button>`;
     const deleteButton = isEditing ?
       `<button id="${bookmark.id}cancelEditButton" type="button">Cancel</button>` :
@@ -67,7 +69,7 @@ const bookmarks = (function(){
       ${isEditing ? `<form class="${bookmark.id}editForm">`: ''}
       ${bookmarkTitle}
       ${bookmarkRating}
-      <section id="${bookmark.id}expand" class="${expanded ? '' : 'hidden'}">
+      <section id="${bookmark.id}expand" class="expandedArea ${expanded ? '' : 'hidden'}">
       ${bookmarkDesc}
       ${bookmarkUrl}
       ${editButton} ${deleteButton}
@@ -95,16 +97,52 @@ const bookmarks = (function(){
     document.getElementById('bookmark-list').innerHTML = bookmarksString;
   }
 
+  function handleErrors(errorMessage) {
+    store.showError = true;
+    store.errorMessage = errorMessage;
+    renderError();
+  }
+
+  function handleCloseErrorButton() {
+    document.getElementById('errorSection').addEventListener('click', (event) => {
+      
+      const errorSection = event.target.closest('section');
+      if (!errorSection) return;
+      if (event.target.id !== 'close-error-button') return;
+
+      store.showError = false;
+      renderError();
+    });
+  }
+
+  function renderError() {
+    // console.log('rendering error');
+    let error = '';
+    if (store.showError) {
+      error = `<div class="error-message-box">
+      <button id="close-error-button">x </button>
+      <p id="error-message">${store.errorMessage}</p>
+      </div>
+      `;
+    }
+
+    document.getElementById('errorSection').innerHTML = error;
+  }
+
   function handleAddBookmarkSubmit() {
     document.getElementById('addBookmarkForm').addEventListener('submit', event => {
       event.preventDefault();
       
       const newBookmark = serializeJSON(event.target);
+      console.log(newBookmark);
       api.createBookmark(newBookmark)
         .then(res => {
           store.addBookmark(res);
           document.getElementById('resetButton').click();
           render();
+        })
+        .catch(error => {
+          handleErrors(error.message);
         });
     });
   }
@@ -144,11 +182,15 @@ const bookmarks = (function(){
       if (!bookmark) return;
 
       const editBookmark = serializeJSON(event.target);
+      console.log(editBookmark);
       api.updateBookmark(bookmark.id, editBookmark)
         .then(() => {
           store.editBookmark(bookmark.id, editBookmark);
           store.setIsEditingState(bookmark.id, false);
           render();
+        })
+        .catch(error => {
+          handleErrors(error.message);
         });
     });
   }
@@ -192,6 +234,7 @@ const bookmarks = (function(){
     handleDeleteButtonClicked();
     handleBookmarkExpand();
     handleBookmarkFilter();
+    handleCloseErrorButton();
   }
 
   return {
