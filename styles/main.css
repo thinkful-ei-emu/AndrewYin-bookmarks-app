@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+.hidden {
+  display: none;1
+}
+
+#formSection, .bookmark-list-item {
+  border: 1px solid black;
+  width: 220px;
+  margin: 5px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+
+.siteRating{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.rating {
+  display: none;
+}
+.rating:checked ~ label {
+  color: orange;
+}
+.checked {
+  margin: 0;
+  color: black;
+}
+.checked:hover,
+.checked:hover ~ .checked:before {
+  color: orange;
+}
+.star {
+  color: orange;
+}
