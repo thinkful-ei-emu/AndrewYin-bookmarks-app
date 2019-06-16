@@ -72,7 +72,9 @@ const bookmarks = (function(){
       <section id="${bookmark.id}expand" class="expandedArea ${expanded ? '' : 'hidden'}">
       ${bookmarkDesc}
       ${bookmarkUrl}
-      ${editButton} ${deleteButton}
+      <section class="edit-delete-section">
+        ${editButton} ${deleteButton}
+      </section>
       </section>
       ${isEditing ? '</form>': ''}
       `;

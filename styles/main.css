@@ -9,7 +9,7 @@ body {
 }
 
 form input, textarea {
-  width: 270px;
+  width: 100%;
 }
 form input {
   height: 25px;
@@ -17,7 +17,7 @@ form input {
 }
 form button {
   margin: 0;
-  width: 135px;
+  width: 45%;
 }
 form textarea {
   height: 50px;
@@ -26,7 +26,6 @@ form textarea {
 p {
   margin: 0;
 }
-
 
 #formSection, .bookmark-list-item {
   display: flex;
@@ -37,14 +36,16 @@ p {
   margin: 5px;
   padding: 10px;
 }
+@media only screen and (min-width: 700px) {
+  #formSection, .bookmark-list-item {
+    width: 600px;
+  }
+}
 
-.expandedArea {
-  display: flex;
-  flex-direction: column;
+section form {
+  width: 100%;
 }
-.hidden {
-  display: none;
-}
+
 
 ul {
   margin: 0;
@@ -56,9 +57,27 @@ li {
 li form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 270px;
+  /* align-items: center; */
+  width: 100%;
 }
+.expandedArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.edit-delete-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.edit-delete-section button {
+  width: 45%;
+}
+.hidden {
+  display: none;
+}
+
 
 .siteRating{
   display: flex;
